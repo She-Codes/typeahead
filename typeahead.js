@@ -33,19 +33,6 @@ var TypeAhead = (function () {
       return collection.filter(function (element) {
         return element.match(regex);
       });
-    },
-    formatMatchesForDisplay: function (arr, searchString) {
-      if (searchString) {
-        return arr.map(function (item) {
-          var regex = new RegExp(searchString, 'gi');
-          var itemWithHighlight = item.replace(regex, '<span class="hl">$&</span>');
-          return '<li ' + settings.class + '>' + itemWithHighlight + '</li>';
-        }).join('');
-      } else {
-        return arr.map(function (item) {
-          return '<li ' + settings.class + '>' + item + '</li>';
-        }).join('');
-      }
     }
   }
 
@@ -75,6 +62,20 @@ var TypeAhead = (function () {
       } else {
         clearList();
         api.typeAheadList = undefined;
+      }
+    }
+
+    function formatMatchesForDisplay(arr, searchString) {
+      if (searchString) {
+        return arr.map(function (item) {
+          var regex = new RegExp(searchString, 'gi');
+          var itemWithHighlight = item.replace(regex, '<span class="hl">$&</span>');
+          return '<li ' + settings.class + '>' + itemWithHighlight + '</li>';
+        }).join('');
+      } else {
+        return arr.map(function (item) {
+          return '<li ' + settings.class + '>' + item + '</li>';
+        }).join('');
       }
     }
 
@@ -171,6 +172,7 @@ var TypeAhead = (function () {
         return;
       }
       Object.assign(settings, defaults, options);
+      settings.formatMatchesForDisplay = formatMatchesForDisplay;
       api.collection = settings.collection;
       api.input = settings.input;
       clearList();
