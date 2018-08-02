@@ -6,6 +6,7 @@
     input:'#conferees-bill-num', 
     listElement: '#conferees-bill-num-list',
     keyNavigation: true,
+    class: 'list-group-item',
     showAll: false,
     collection: [...],
     filterMatches: function(searchString, collection) {
@@ -26,6 +27,7 @@ var TypeAhead = (function () {
     collection: [],
     keyNavigation: false,
     showAll: false, // will erase list otherwise if input empty
+    class: 'ta-item',
     filterMatches: function (searchString, collection) {
       var regex = new RegExp(searchString, 'gi');
       return collection.filter(function (element) {
@@ -37,11 +39,11 @@ var TypeAhead = (function () {
         return arr.map(function (item) {
           var regex = new RegExp(searchString, 'gi');
           var itemWithHighlight = item.replace(regex, '<span class="hl">$&</span>');
-          return '<li>' + itemWithHighlight + '</li>';
+          return '<li ' + settings.class + '>' + itemWithHighlight + '</li>';
         }).join('');
       } else {
         return arr.map(function (item) {
-          return '<li>' + item + '</li>';
+          return '<li ' + settings.class + '>' + item + '</li>';
         }).join('');
       }
     }
