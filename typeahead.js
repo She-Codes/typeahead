@@ -70,11 +70,11 @@ var TypeAhead = (function () {
         return arr.map(function (item) {
           var regex = new RegExp(searchString, 'gi');
           var itemWithHighlight = item.replace(regex, '<span class="hl">$&</span>');
-          return '<li ' + settings.class + '>' + itemWithHighlight + '</li>';
+          return '<li class="' + settings.class + '">' + itemWithHighlight + '</li>';
         }).join('');
       } else {
         return arr.map(function (item) {
-          return '<li ' + settings.class + '>' + item + '</li>';
+          return '<li class="' + settings.class + '">' + item + '</li>';
         }).join('');
       }
     }
